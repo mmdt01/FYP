@@ -30,17 +30,6 @@ class MLEngine:
         eeg_data = my_data.get_epochs()
         print("The shape of the loaded eeg data is:", eeg_data.get('x_data').shape)
         print("The shape of the loaded eeg labels is:", eeg_data.get('y_labels').shape)
-        
-        # '''for BCIC Dataset'''
-        # bcic_data = LoadData.LoadBCIC(self.file_to_load, self.data_path)
-        # eeg_data = bcic_data.get_epochs()
-
-        '''for KU dataset'''
-        # ku_data = LoadData.LoadKU(self.subject_id,self.data_path)
-        # eeg_data = ku_data.get_epochs(self.sessions)
-        # preprocess = Preprocess.PreprocessKU()
-        # eeg_data_selected_channels = preprocess.select_channels(eeg_data.get('x_data'),eeg_data.get('ch_names'))
-        # eeg_data.update({'x_data':eeg_data_selected_channels})
 
         fbank = FilterBank(eeg_data.get('fs'))
         fbank_coeff = fbank.get_filter_coeff()
@@ -84,8 +73,8 @@ class MLEngine:
                     x_features_test = fbcsp.transform(x_test_fb,class_idx=cls_of_interest)
 
                     # classifier_type = SVR(gamma='auto')
-                    # classifier_type = SVC(gamma='auto')
-                    classifier_type = KNN.KNeighborsClassifier(n_neighbors=15)
+                    classifier_type = SVC(gamma='auto')
+                    # classifier_type = KNN.KNeighborsClassifier(n_neighbors=15)
                     classifier = Classifier(classifier_type)
                     y_train_predicted[:,j] = classifier.fit(x_features_train,np.asarray(y_train_cls,dtype=np.float))
                     y_test_predicted[:,j] = classifier.predict(x_features_test)
