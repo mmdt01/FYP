@@ -1,4 +1,4 @@
-# FYP
+# Decoding Robot Interaction Cognitive Tasks from EEG Signals
 
 This repository does not contain the raw or preprocessed EEG files for the subjects. Please seperately download and move the preprocessed file for subject 4 (s4_preprocessed.fif) into the directory 'subject_4'.
 
